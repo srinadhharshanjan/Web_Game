@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";  // ✅ Import useParams
+import { useParams, useLocation } from "react-router-dom";
+import "./styles.css"; // Import the updated CSS file
+
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
 
 function GamePage() {
-  const { gameType } = useParams();  // ✅ Get gameType from URL params
+  const { gameType } = useParams();
+  const query = useQuery();
+  const gridSize = query.get("grid_size");
+  const words = query.get("words");
+
   const [grid, setGrid] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -10,7 +19,7 @@ function GamePage() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://127.0.0.1:5000/game?game_type=${gameType}&grid_size=10&words=apple,banana,grape`
+          `http://127.0.0.1:5000/game?game_type=${gameType}&grid_size=${gridSize}&words=${words}`
         );
         const data = await response.json();
         setGrid(data.grid);
@@ -21,21 +30,28 @@ function GamePage() {
       }
     };
 
-    if (gameType) {
+    if (gameType && gridSize && words) {
       fetchData();
     }
-
-  }, [gameType]);
+  }, [gameType, gridSize, words]);
 
   return (
-    <div>
-      <h2>{gameType === "wordsearch" ? "Word Search" : "Crossword"}</h2>
+    <div className="game-container">
+      <h1>{gameType === "wordsearch" ? "Word Search" : "Crossword"}</h1>
       {loading ? (
         <p>Loading...</p>
       ) : (
-        grid.map((row, rowIndex) => (
-          <div key={rowIndex}>{row.join(" ")}</div>
-        ))
+        <div className="grid-wrapper">
+          <div className="grid-container" style={{ gridTemplateColumns: `repeat(${gridSize}, 1fr)` }}>
+            {grid.map((row, rowIndex) =>
+              row.map((cell, colIndex) => (
+                <div key={`${rowIndex}-${colIndex}`} className="grid-cell">
+                  {cell}
+                </div>
+              ))
+            )}
+          </div>
+        </div>
       )}
     </div>
   );

@@ -1,51 +1,48 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./styles.css"; // Import CSS for styling
 
 function HomePage() {
-  const [gridSize, setGridSize] = useState(10);
-  const [words, setWords] = useState("apple,banana,grape");
   const navigate = useNavigate();
+  const [gridSize, setGridSize] = useState("10"); // Default grid size
+  const [words, setWords] = useState("apple,banana,grape");
 
-  const handleSubmit = (e, gameType) => {
-    e.preventDefault();
-    // Navigate to the game page with custom grid size, words, and selected game type
+  const handleStartGame = (gameType) => {
     navigate(`/game/${gameType}?grid_size=${gridSize}&words=${words}`);
   };
 
   return (
-    <div>
+    <div className="home-container">
       <h1>Select a Game</h1>
-      <form>
-        <div>
-          <label>Grid Size: </label>
-          <input
-            type="number"
-            value={gridSize}
-            onChange={(e) => setGridSize(e.target.value)}
-            min="5"
-            max="20"
-            required
-          />
-        </div>
 
-        <div>
-          <label>Words (comma-separated): </label>
-          <input
-            type="text"
-            value={words}
-            onChange={(e) => setWords(e.target.value)}
-            required
-          />
-        </div>
+      <div className="form-group">
+        <label>Grid Size:</label>
+        <select value={gridSize} onChange={(e) => setGridSize(e.target.value)}>
+          {Array.from({ length: 19 }, (_, i) => i + 2).map((size) => (
+            <option key={size} value={size}>
+              {size} × {size}
+            </option>
+          ))}
+        </select>
+      </div>
 
-        <button type="submit" onClick={(e) => handleSubmit(e, 'wordsearch')}>
+      <div className="form-group">
+        <label>Words (comma-separated):</label>
+        <input
+          type="text"
+          value={words}
+          onChange={(e) => setWords(e.target.value)}
+        />
+      </div>
+
+      <div className="button-group">
+        <button className="start-button" onClick={() => handleStartGame("wordsearch")}>
           Start Word Search
         </button>
-
-        <button type="submit" onClick={(e) => handleSubmit(e, 'crossword')}>
+        <button className="start-button" onClick={() => handleStartGame("crossword")}>
           Start Crossword
         </button>
-      </form>
+      </div>
     </div>
   );
 }
