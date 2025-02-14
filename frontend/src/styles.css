@@ -1,136 +1,152 @@
-/* 🌟 General Page Styling */
+/* 🌟 GENERAL PAGE STYLING */
+/* This styles the entire body of the page */
 body {
-  font-family: "Arial", sans-serif;
-  background: linear-gradient(135deg, #1e3c72, #2a5298);
-  color: white;
-  text-align: center;
-  height: 100vh;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  font-family: "Arial", sans-serif; /* Sets the font style */
+  background: linear-gradient(135deg, #1e3c72, #2a5298); /* Creates a gradient background */
+  color: white; /* Text color */
+  text-align: center; /* Centers text by default */
+  height: 100vh; /* Full viewport height */
+  margin: 0; /* Removes default margin */
+  display: flex; /* Uses flexbox for layout */
+  align-items: center; /* Centers content vertically */
+  justify-content: center; /* Centers content horizontally */
 }
 
-/* 🏆 Game Container */
+/* 🏆 GAME CONTAINER */
+/* Wrapper for the entire game content */
 .game-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100vh;
+  display: flex; /* Uses flexbox for flexible layout */
+  flex-direction: column; /* Arranges content in a vertical column */
+  align-items: center; /* Centers content horizontally */
+  justify-content: center; /* Centers content vertically */
+  width: 100%; /* Full width */
+  height: 100vh; /* Full viewport height */
 }
 
-/* 📌 Centering Grid - Dynamically Adjusts */
+/* 📌 GRID WRAPPER (DYNAMICALLY ADJUSTS) */
+/* Container that holds the game grid */
 .grid-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 15px;
-  box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.2);
-  transition: all 0.3s ease-in-out;
+  display: flex; /* Uses flexbox to align items */
+  justify-content: center; /* Centers grid horizontally */
+  align-items: center; /* Centers grid vertically */
+  padding: 20px; /* Adds padding around the grid */
+  background: rgba(0, 0, 0, 0.3); /* Semi-transparent black background */
+  border-radius: 15px; /* Rounds the corners */
+  box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.2); /* Adds a subtle white glow */
+  transition: all 0.3s ease-in-out; /* Smooth animation effects */
 }
 
-/* 🔲 Dynamic Grid Styling */
+/* 🔲 DYNAMIC GRID STYLING */
+/* The grid layout for the game */
 .grid-container {
-  display: grid;
-  gap: 5px;
-  padding: 10px;
-  max-width: 100%;
-  transition: all 0.3s ease-in-out;
+  display: grid; /* Uses CSS Grid layout */
+  gap: 5px; /* Spacing between grid cells */
+  padding: 10px; /* Padding around the grid */
+  max-width: 100%; /* Ensures it does not exceed the screen width */
+  transition: all 0.3s ease-in-out; /* Smooth transitions */
 }
 
-/* Adjust grid size dynamically */
+/* 🎯 DYNAMIC GRID SIZE ADJUSTMENTS */
+/* These styles adjust the grid layout dynamically based on grid size */
 .grid-container[data-size="3"] { grid-template-columns: repeat(3, 1fr); width: 120px; }
 .grid-container[data-size="5"] { grid-template-columns: repeat(5, 1fr); width: 200px; }
 .grid-container[data-size="7"] { grid-template-columns: repeat(7, 1fr); width: 280px; }
 .grid-container[data-size="10"] { grid-template-columns: repeat(10, 1fr); width: 400px; }
 .grid-container[data-size="15"] { grid-template-columns: repeat(15, 1fr); width: 600px; }
 
-/* 🔳 Individual Cells (Letter Boxes) */
+/* 🔳 INDIVIDUAL GRID CELLS */
+/* Styles for each letter block in the grid */
 .grid-cell {
-  width: 40px;
-  height: 40px;
-  background: white;
-  color: black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  font-weight: bold;
-  border-radius: 5px;
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
-  transition: transform 0.2s ease-in-out;
+  width: 40px; /* Fixed width for each cell */
+  height: 40px; /* Fixed height for each cell */
+  background: white; /* Background color */
+  color: black; /* Text color */
+  display: flex; /* Uses flexbox to center content */
+  align-items: center; /* Centers text vertically */
+  justify-content: center; /* Centers text horizontally */
+  font-size: 18px; /* Sets font size */
+  font-weight: bold; /* Makes text bold */
+  border-radius: 5px; /* Rounds the corners */
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3); /* Adds a slight shadow effect */
+  transition: transform 0.2s ease-in-out; /* Smooth hover effect */
 }
 
+/* 💡 GRID CELL HOVER EFFECT */
+/* Adds an interactive effect when the user hovers over a grid cell */
 .grid-cell:hover {
-  transform: scale(1.1);
-  background: #ff9800;
-  color: white;
+  transform: scale(1.1); /* Enlarges the cell slightly */
+  background: #ff9800; /* Changes background color to orange */
+  color: white; /* Changes text color to white */
 }
 
-/* 📌 Home Page Styling */
+/* 📌 HOME PAGE STYLING */
+/* Wrapper for the home page form */
 .home-container {
-  background: rgba(0, 0, 0, 0.7);
-  padding: 40px;
-  border-radius: 15px;
-  box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.2);
-  max-width: 450px;
-  text-align: center;
+  background: rgba(0, 0, 0, 0.7); /* Dark semi-transparent background */
+  padding: 40px; /* Adds spacing inside the container */
+  border-radius: 15px; /* Rounds the corners */
+  box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.2); /* Adds a soft glow effect */
+  max-width: 450px; /* Limits the width of the container */
+  text-align: center; /* Centers all text */
 }
 
-/* 🎨 Dropdown & Input Fields */
+/* 🎨 DROPDOWN & INPUT FIELDS */
+/* Styles for form elements */
 .form-group {
-  margin: 15px 0;
+  margin: 15px 0; /* Adds spacing around form elements */
 }
 
+/* Labels for dropdowns and inputs */
 .form-group label {
-  display: block;
-  font-size: 18px;
-  margin-bottom: 5px;
+  display: block; /* Ensures labels are on their own line */
+  font-size: 18px; /* Increases font size */
+  margin-bottom: 5px; /* Adds space below the label */
 }
 
+/* Dropdown and input fields */
 .form-group select,
 .form-group input {
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 8px;
-  border: none;
-  width: 100%;
-  background: #ffffff;
-  text-align: center;
+  padding: 10px; /* Adds space inside the input fields */
+  font-size: 16px; /* Sets text size */
+  border-radius: 8px; /* Rounds the input field edges */
+  border: none; /* Removes default borders */
+  width: 100%; /* Ensures full width */
+  background: #ffffff; /* White background */
+  text-align: center; /* Centers text */
 }
 
-/* 🔘 Buttons */
+/* 🔘 BUTTON STYLING */
+/* Groups buttons together */
 .button-group {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
+  display: flex; /* Uses flexbox to arrange buttons */
+  justify-content: center; /* Centers buttons */
+  gap: 15px; /* Adds spacing between buttons */
 }
 
+/* Start button styles */
 .start-button {
-  background: #ff9800;
-  color: white;
-  padding: 12px 20px;
-  font-size: 18px;
-  font-weight: bold;
-  border-radius: 10px;
-  cursor: pointer;
-  border: none;
-  transition: all 0.3s ease-in-out;
+  background: #ff9800; /* Orange background */
+  color: white; /* White text */
+  padding: 12px 20px; /* Adds spacing inside the button */
+  font-size: 18px; /* Increases text size */
+  font-weight: bold; /* Makes text bold */
+  border-radius: 10px; /* Rounds the corners */
+  cursor: pointer; /* Changes cursor to pointer when hovered */
+  border: none; /* Removes default button border */
+  transition: all 0.3s ease-in-out; /* Smooth hover effect */
 }
 
+/* Hover effect for start button */
 .start-button:hover {
-  background: #e68900;
-  transform: scale(1.08);
+  background: #e68900; /* Darker orange */
+  transform: scale(1.08); /* Slightly enlarges the button */
 }
 
-/* 🚨 Error Message */
+/* 🚨 ERROR MESSAGE STYLING */
+/* Displays error messages in red */
 .error-message {
-  color: red;
-  font-weight: bold;
-  text-align: center;
-  margin-top: 20px;
+  color: red; /* Red text */
+  font-weight: bold; /* Makes text bold */
+  text-align: center; /* Centers text */
+  margin-top: 20px; /* Adds spacing above the error message */
 }
