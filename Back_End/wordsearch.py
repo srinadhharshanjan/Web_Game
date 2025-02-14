@@ -4,14 +4,26 @@ import string
 class WordSearchGame:
     def __init__(self, grid_size=10, words=None):
         self.grid_size = grid_size
-        self.grid = self.generate_grid()
         self.word_list = words if words else ['apple', 'banana', 'grape', 'kiwi', 'pear']
+        
+        # Validate grid size before proceeding
+        self.validate_grid_size()
+
+        self.grid = self.generate_grid()
         self.directions = ['h', 'h_rev', 'v', 'v_rev', 'd1', 'd1_rev', 'd2', 'd2_rev']
         self.placed_words = []
         self.unplaced_words = []
         self.place_words()
         self.fill_empty_spaces()
         self.print_summary()
+
+    def validate_grid_size(self):
+        """Validates that the grid is large enough to fit the longest word."""
+        max_word_length = max(len(word) for word in self.word_list)
+        if self.grid_size < max_word_length:
+            raise ValueError(
+                f"Grid size ({self.grid_size}x{self.grid_size}) is too small for the longest word '{max(self.word_list, key=len)}' (length: {max_word_length})."
+            )
 
     def generate_grid(self):
         """Generates an empty grid filled with spaces."""
@@ -33,43 +45,46 @@ class WordSearchGame:
                     self.place_word(word, row, col, direction)
                     placed = True
                     self.placed_words.append((word, row, col, direction))
-                    print(f"Placed word: {word} at ({row}, {col}) in direction {direction}")
                 else:
                     invalid_positions.add(position_key)
-                    print(f"Failed to place word: {word} at ({row}, {col}) in direction {direction}")
 
                 attempts += 1
 
             if not placed:
                 self.unplaced_words.append(word)
-                print(f"Could not place the word: {word}. Giving up after {attempts} attempts.")
 
     def get_random_start(self, word, direction):
         """Gets a random valid start position based on the word length and direction."""
+        word_len = len(word)
+        
+        # Ensure we don't get invalid ranges
+        if self.grid_size < word_len:
+            raise ValueError(f"Cannot place word '{word}', grid size too small.")
+
         if direction == 'h':
             row = random.randint(0, self.grid_size - 1)
-            col = random.randint(0, self.grid_size - len(word))
+            col = random.randint(0, self.grid_size - word_len)
         elif direction == 'h_rev':
             row = random.randint(0, self.grid_size - 1)
-            col = random.randint(len(word) - 1, self.grid_size - 1)
+            col = random.randint(word_len - 1, self.grid_size - 1)
         elif direction == 'v':
-            row = random.randint(0, self.grid_size - len(word))
+            row = random.randint(0, self.grid_size - word_len)
             col = random.randint(0, self.grid_size - 1)
         elif direction == 'v_rev':
-            row = random.randint(len(word) - 1, self.grid_size - 1)
+            row = random.randint(word_len - 1, self.grid_size - 1)
             col = random.randint(0, self.grid_size - 1)
         elif direction == 'd1':
-            row = random.randint(0, self.grid_size - len(word))
-            col = random.randint(0, self.grid_size - len(word))
+            row = random.randint(0, self.grid_size - word_len)
+            col = random.randint(0, self.grid_size - word_len)
         elif direction == 'd1_rev':
-            row = random.randint(len(word) - 1, self.grid_size - 1)
-            col = random.randint(len(word) - 1, self.grid_size - 1)
+            row = random.randint(word_len - 1, self.grid_size - 1)
+            col = random.randint(word_len - 1, self.grid_size - 1)
         elif direction == 'd2':
-            row = random.randint(0, self.grid_size - len(word))
-            col = random.randint(len(word) - 1, self.grid_size - 1)
+            row = random.randint(0, self.grid_size - word_len)
+            col = random.randint(word_len - 1, self.grid_size - 1)
         else:  # 'd2_rev'
-            row = random.randint(len(word) - 1, self.grid_size - 1)
-            col = random.randint(0, self.grid_size - len(word))
+            row = random.randint(word_len - 1, self.grid_size - 1)
+            col = random.randint(0, self.grid_size - word_len)
 
         return row, col
 
@@ -77,29 +92,21 @@ class WordSearchGame:
         """Checks if a word can be placed at a given location in the chosen direction."""
         for i in range(len(word)):
             if direction == 'h':
-                c = col + i
-                r = row
+                r, c = row, col + i
             elif direction == 'h_rev':
-                c = col - i
-                r = row
+                r, c = row, col - i
             elif direction == 'v':
-                r = row + i
-                c = col
+                r, c = row + i, col
             elif direction == 'v_rev':
-                r = row - i
-                c = col
+                r, c = row - i, col
             elif direction == 'd1':
-                r = row + i
-                c = col + i
+                r, c = row + i, col + i
             elif direction == 'd1_rev':
-                r = row - i
-                c = col - i
+                r, c = row - i, col - i
             elif direction == 'd2':
-                r = row + i
-                c = col - i
+                r, c = row + i, col - i
             elif direction == 'd2_rev':
-                r = row - i
-                c = col + i
+                r, c = row - i, col + i
 
             if not (0 <= r < self.grid_size and 0 <= c < self.grid_size):
                 return False
@@ -112,29 +119,21 @@ class WordSearchGame:
         """Places a word in the grid in the chosen direction."""
         for i in range(len(word)):
             if direction == 'h':
-                c = col + i
-                r = row
+                r, c = row, col + i
             elif direction == 'h_rev':
-                c = col - i
-                r = row
+                r, c = row, col - i
             elif direction == 'v':
-                r = row + i
-                c = col
+                r, c = row + i, col
             elif direction == 'v_rev':
-                r = row - i
-                c = col
+                r, c = row - i, col
             elif direction == 'd1':
-                r = row + i
-                c = col + i
+                r, c = row + i, col + i
             elif direction == 'd1_rev':
-                r = row - i
-                c = col - i
+                r, c = row - i, col - i
             elif direction == 'd2':
-                r = row + i
-                c = col - i
+                r, c = row + i, col - i
             elif direction == 'd2_rev':
-                r = row - i
-                c = col + i
+                r, c = row - i, col + i
 
             self.grid[r][c] = word[i]
 
@@ -162,12 +161,16 @@ class WordSearchGame:
         return self.grid
 
 # Example usage:
-game = WordSearchGame(grid_size=10, words=['apple', 'banana', 'grape'])
-grid = game.get_grid()
+try:
+    game = WordSearchGame(grid_size=5, words=['apple', 'banana', 'grape'])  # This will throw an error
+    grid = game.get_grid()
 
-# Print the final grid
-for row in grid:
-    print(" ".join(row))
+    # Print the final grid
+    for row in grid:
+        print(" ".join(row))
 
-# Print the placement summary
-game.print_summary()
+    # Print the placement summary
+    game.print_summary()
+
+except ValueError as e:
+    print(f"Error: {e}")

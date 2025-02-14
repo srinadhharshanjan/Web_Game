@@ -130,5 +130,11 @@ body {
     background: #e68900;
     transform: scale(1.08);
   }
+  .error-message {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+  }
   
   

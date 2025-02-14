@@ -14,6 +14,7 @@ function GamePage() {
 
   const [grid, setGrid] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(""); // Error message state
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,25 +22,44 @@ function GamePage() {
         const response = await fetch(
           `http://127.0.0.1:5000/game?game_type=${gameType}&grid_size=${gridSize}&words=${words}`
         );
+        
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status} - ${response.statusText}`);
+        }
+
         const data = await response.json();
+
+        if (data.error) {
+          throw new Error(data.error); // Handle backend errors
+        }
+
         setGrid(data.grid);
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching grid:", error);
+        console.error("The words are too big for the given grid size:", error.message);
+        setErrorMessage(error.message);
         setLoading(false);
       }
     };
 
     if (gameType && gridSize && words) {
       fetchData();
+    } else {
+      setErrorMessage("Invalid parameters! Please provide game type, grid size, and words.");
+      setLoading(false);
     }
   }, [gameType, gridSize, words]);
 
   return (
     <div className="game-container">
       <h1>{gameType === "wordsearch" ? "Word Search" : "Crossword"}</h1>
+
       {loading ? (
         <p>Loading...</p>
+      ) : errorMessage ? (
+        <div className="error-message">
+          <p>{errorMessage}</p>
+        </div>
       ) : (
         <div className="grid-wrapper">
           <div className="grid-container" style={{ gridTemplateColumns: `repeat(${gridSize}, 1fr)` }}>
