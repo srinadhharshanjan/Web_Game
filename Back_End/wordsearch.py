@@ -142,7 +142,7 @@ class WordSearchGame:
         for r in range(self.grid_size):
             for c in range(self.grid_size):
                 if self.grid[r][c] == ' ':
-                    self.grid[r][c] = random.choice(string.ascii_uppercase)
+                    self.grid[r][c] = random.choice(string.ascii_lowercase)
 
     def print_summary(self):
         """Prints a summary of placed and unplaced words."""

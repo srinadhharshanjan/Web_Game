@@ -1,140 +1,136 @@
 /* 🌟 General Page Styling */
 body {
-    font-family: "Arial", sans-serif;
-    background: linear-gradient(135deg, #1e3c72, #2a5298);
-    color: white;
-    text-align: center;
-    height: 100vh;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  /* 🏆 Game Container */
-  .game-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100vh;
-  }
-  
-  /* 📌 Centering Grid */
-  .grid-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 15px;
-    box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.2);
-  }
-  
-  /* 🔲 Grid Styling */
-  .grid-container {
-    display: grid;
-    gap: 5px;
-    padding: 10px;
-    max-width: 100%;
-  }
-  
-  /* 🔳 Individual Cells (Letter Boxes) */
-  .grid-cell {
-    width: 40px;
-    height: 40px;
-    background: white;
-    color: black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    font-weight: bold;
-    border-radius: 5px;
-    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
-    transition: transform 0.2s ease-in-out;
-  }
-  
-  .grid-cell:hover {
-    transform: scale(1.1);
-    background: #ff9800;
-    color: white;
-  }
-  /* 🌟 General Styling */
-body {
-    font-family: "Arial", sans-serif;
-    background: linear-gradient(135deg, #1e3c72, #2a5298);
-    color: white;
-    text-align: center;
-    height: 100vh;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  /* 📌 Home Page Styling */
-  .home-container {
-    background: rgba(0, 0, 0, 0.7);
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.2);
-    max-width: 450px;
-    text-align: center;
-  }
-  
-  /* 🎨 Dropdown & Input Fields */
-  .form-group {
-    margin: 15px 0;
-  }
-  
-  .form-group label {
-    display: block;
-    font-size: 18px;
-    margin-bottom: 5px;
-  }
-  
-  .form-group select,
-  .form-group input {
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 8px;
-    border: none;
-    width: 100%;
-    background: #ffffff;
-    text-align: center;
-  }
-  
-  /* 🔘 Buttons */
-  .button-group {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-  }
-  
-  .start-button {
-    background: #ff9800;
-    color: white;
-    padding: 12px 20px;
-    font-size: 18px;
-    font-weight: bold;
-    border-radius: 10px;
-    cursor: pointer;
-    border: none;
-    transition: all 0.3s ease-in-out;
-  }
-  
-  .start-button:hover {
-    background: #e68900;
-    transform: scale(1.08);
-  }
-  .error-message {
-    color: red;
-    font-weight: bold;
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  
+  font-family: "Arial", sans-serif;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+  text-align: center;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 🏆 Game Container */
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+}
+
+/* 📌 Centering Grid - Dynamically Adjusts */
+.grid-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+/* 🔲 Dynamic Grid Styling */
+.grid-container {
+  display: grid;
+  gap: 5px;
+  padding: 10px;
+  max-width: 100%;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Adjust grid size dynamically */
+.grid-container[data-size="3"] { grid-template-columns: repeat(3, 1fr); width: 120px; }
+.grid-container[data-size="5"] { grid-template-columns: repeat(5, 1fr); width: 200px; }
+.grid-container[data-size="7"] { grid-template-columns: repeat(7, 1fr); width: 280px; }
+.grid-container[data-size="10"] { grid-template-columns: repeat(10, 1fr); width: 400px; }
+.grid-container[data-size="15"] { grid-template-columns: repeat(15, 1fr); width: 600px; }
+
+/* 🔳 Individual Cells (Letter Boxes) */
+.grid-cell {
+  width: 40px;
+  height: 40px;
+  background: white;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 5px;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease-in-out;
+}
+
+.grid-cell:hover {
+  transform: scale(1.1);
+  background: #ff9800;
+  color: white;
+}
+
+/* 📌 Home Page Styling */
+.home-container {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.2);
+  max-width: 450px;
+  text-align: center;
+}
+
+/* 🎨 Dropdown & Input Fields */
+.form-group {
+  margin: 15px 0;
+}
+
+.form-group label {
+  display: block;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.form-group select,
+.form-group input {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  width: 100%;
+  background: #ffffff;
+  text-align: center;
+}
+
+/* 🔘 Buttons */
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.start-button {
+  background: #ff9800;
+  color: white;
+  padding: 12px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.start-button:hover {
+  background: #e68900;
+  transform: scale(1.08);
+}
+
+/* 🚨 Error Message */
+.error-message {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+}
